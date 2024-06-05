@@ -22,3 +22,51 @@ for(let i=0; i<projects.length; i++) {
 AfficheGallery(projects)
 
 
+/*********Create Filter&Buttons******* */
+const filter = document.querySelector(".filter");
+
+
+ function ListCategory (){
+ for(let i=0 ; i<categories.length; i++){  
+    const buttonFilter = document.createElement("button")
+    buttonFilter.innerText= categories[i].name
+    buttonFilter.classList.add("Button-filter")
+    buttonFilter.dataset.category = categories[i].name;
+    filter.appendChild(buttonFilter);
+ }  
+}
+InitialButton ()
+ListCategory ()
+ function InitialButton (){
+    const buttonAll = document.createElement("button")
+    buttonAll.innerText= "Tous"
+    buttonAll.classList.add("Button-filter")
+    buttonAll.dataset.category = "Tous";
+    filter.appendChild(buttonAll);
+}
+
+function FilterProjects () {
+    const filterButtons = document.querySelectorAll(".Button-filter");
+    //identify wich filter button has been clicked
+    filterButtons.forEach((i) => {
+      i.addEventListener("click", function () {
+        FilterCategory(i.dataset.category);
+      });
+    });
+  }
+  
+  function FilterCategory(datasetCategory) {
+    const figures = document.querySelectorAll("figure");
+    if ("Tous" === datasetCategory) {
+      figures.forEach((figure) => {
+        figure.style.display = "block";
+      });
+    } else {
+      figures.forEach((figure) => {
+        figure.dataset.category === datasetCategory ? (figure.style.display = "block") : (figure.style.display = "none");
+      });
+    }
+  }
+  
+  
+  FilterProjects ()
